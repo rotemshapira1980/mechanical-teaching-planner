@@ -214,8 +214,22 @@ document.querySelector('#proposal-form').addEventListener('submit', (event) => {
   data.proposals.push({ id: crypto.randomUUID(), semester: String(form.get('semester')), courseId, lecturer, day: String(form.get('day')), start, end });
   saveData('הצעת הזמינות נשמרה'); event.currentTarget.reset(); setupTimeOptions(); renderAll();
 });
-document.querySelector('#proposal-list').addEventListener('click', (event) => {
+document.querySelector('#proposal-list').addEventListener('click', async (event) => {
   const button = event.target.closest('[data-delete-proposal]'); if (!button) return; const id = button.dataset.deleteProposal;
+  const proposal = data.proposals.find((item) => item.id === id);
+  if (!proposal || !window.confirm('למחוק את ההצעה ואת השיבוץ המשויך אליה?')) return;
+  if (proposal.remote || proposal.role === 'lecturer' || proposal.role === 'assistant') {
+    if (typeof sharedClient === 'undefined' || !sharedClient) return showToast('לא ניתן להתחבר למאגר. ההצעה לא נמחקה.');
+    button.disabled = true;
+    try {
+      const { data: sessionData, error: sessionError } = await sharedClient.auth.getSession();
+      if (sessionError || sessionData.session?.user?.id !== ADMIN_ID) { showToast('יש להתחבר כמנהלת כדי למחוק בקשה מהמאגר.'); return; }
+      const { data: deleted, error } = await sharedClient.from('teaching_requests').delete().eq('id', id).select('id');
+      if (error || deleted.length !== 1) { showToast('מחיקת הבקשה מהמאגר נכשלה. ההצעה לא נמחקה.'); return; }
+    } catch {
+      showToast('מחיקת הבקשה מהמאגר נכשלה. ההצעה לא נמחקה.'); return;
+    } finally { button.disabled = false; }
+  }
   data.proposals = data.proposals.filter((item) => item.id !== id); for (const semester of ['fall', 'spring']) data.schedules[semester] = data.schedules[semester].filter((item) => item.proposalId !== id);
   saveData('ההצעה הוסרה'); renderAll();
 });

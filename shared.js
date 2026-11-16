@@ -61,7 +61,7 @@ if (document.querySelector('#admin-login')) {
           const remoteCourse = courses.find((course) => course.id === request.course_id);
           const localCourse = courseById(request.course_id) || (remoteCourse && courseByCode(remoteCourse.code));
           if (!localCourse) continue;
-          data.proposals.push({ id: request.id, courseId: localCourse.id, semester: request.semester, lecturer: request.lecturer, role: request.teaching_role, day: request.day, start: request.starts_at.slice(0, 5), end: request.ends_at.slice(0, 5) });
+          data.proposals.push({ id: request.id, remote: true, courseId: localCourse.id, semester: request.semester, lecturer: request.lecturer, role: request.teaching_role, day: request.day, start: request.starts_at.slice(0, 5), end: request.ends_at.slice(0, 5) });
           added += 1;
         }
         saveData(); renderAll();
