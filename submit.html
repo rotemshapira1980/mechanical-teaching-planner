@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>הגשת בקשת הוראה | הנדסת מכונות</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="submit.js" defer></script>
+</head>
+<body class="submission-page">
+  <header class="submission-header"><strong>מערכת הוראה</strong><span>הנדסת מכונות</span></header>
+  <main class="submission-main">
+    <p class="eyebrow">בקשות הוראה</p><h1>הגשת בקשה</h1>
+    <form id="request-form" class="form-stack submission-form">
+      <label>שם מלא<input name="lecturer" autocomplete="name" maxlength="150" required /></label>
+      <label>תפקיד<select name="role" required><option value="">בחירת תפקיד</option><option value="lecturer">מרצה</option><option value="assistant">מתרגלת או מתרגל</option></select></label>
+      <label>סמסטר<select name="semester" required><option value="">בחירת סמסטר</option><option value="fall">חורף</option><option value="spring">אביב</option></select></label>
+      <label>קורס<select id="request-course" name="course" required disabled><option value="">טוען קורסים...</option></select></label>
+      <label>יום מועדף<select name="day" required><option value="">בחירת יום</option><option>ראשון</option><option>שני</option><option>שלישי</option><option>רביעי</option><option>חמישי</option></select></label>
+      <div class="time-row"><label>משעה<input type="time" name="start" required /></label><span class="time-separator">עד</span><label>עד שעה<input type="time" name="end" required /></label></div>
+      <button class="primary-button full-button" id="request-submit" type="submit" disabled>שליחת בקשה</button>
+    </form>
+    <p id="request-status" role="status" aria-live="polite"></p>
+    <a class="source-link" href="index.html">כניסת מנהלת ←</a>
+  </main>
+</body>
+</html>
