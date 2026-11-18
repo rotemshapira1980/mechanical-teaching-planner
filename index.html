@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html lang="he" dir="rtl">
   <head>
@@ -62,4 +63,70 @@
     </div>
     <div id="toast" class="toast" role="status" aria-live="polite"></div>
   </body>
+=======
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f4ef" />
+    <title>מערכת הוראה | הנדסת מכונות</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="app.js" defer></script>
+    <script src="shared.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="#dashboard" aria-label="מערכת הוראה, ראשי"><span class="brand-mark">מ</span><span><strong>מערכת הוראה</strong><small>הנדסת מכונות · טכניון</small></span></a>
+        <div class="sidebar-label">ניהול סמסטר</div>
+        <nav class="main-nav" aria-label="ניווט ראשי">
+          <button class="nav-link active" data-view="dashboard"><span class="nav-glyph">⌂</span>סקירה</button>
+          <button class="nav-link" data-view="catalog"><span class="nav-glyph">▤</span>קטלוג קורסים</button>
+          <button class="nav-link" data-view="proposals"><span class="nav-glyph">◷</span>הצעות הוראה</button>
+          <button class="nav-link" data-view="schedule"><span class="nav-glyph">▦</span>מערכות שעות</button>
+          <button class="nav-link" data-view="scores"><span class="nav-glyph">↗</span>ניקוד מרצים</button>
+        </nav>
+        <div class="sidebar-foot"><span class="status-dot"></span><span>מערכות נשמרות בדפדפן</span></div>
+      </aside>
+      <main class="main-content">
+        <header class="topbar"><div class="breadcrumb">הנדסת מכונות <span>/</span> <b id="current-view-label">סקירה</b></div><div class="topbar-meta"><span class="academic-year">תכנון הוראה</span><span class="topbar-mark">ME</span></div></header>
+        <section class="view active" id="view-dashboard">
+          <div class="page-heading"><div><p class="eyebrow">מרכז תכנון הוראה</p><h1>בוקר טוב, מתחילים לתכנן.</h1><p class="page-subtitle">ניהול הצעות, זמינות ומערכות הוראה לסמסטרים.</p></div><a class="primary-button" href="submit.html">טופס הגשת בקשות ←</a></div>
+          <section class="panel cloud-panel" aria-labelledby="cloud-heading"><div class="panel-heading"><div><p class="eyebrow">מאגר משותף</p><h2 id="cloud-heading">גישה למנהלת</h2></div><button class="quiet-button" id="admin-signout" type="button" hidden>יציאה</button></div><form id="admin-login" class="cloud-login"><label>אימייל<input type="email" name="email" autocomplete="username" required /></label><label>סיסמה<input type="password" name="password" autocomplete="current-password" required /></label><button class="primary-button" type="submit">כניסה</button></form><p id="cloud-status" role="status">יש להתחבר כדי לנהל את המאגר המשותף.</p><div class="heading-actions"><button class="secondary-button" id="publish-catalog" type="button" disabled>פרסום הקטלוג למגישים</button><button class="secondary-button" id="sync-requests" type="button" disabled>טעינת בקשות שהוגשו</button></div></section>
+          <div class="stats-grid"><article class="stat-box stat-accent"><div class="stat-label">קורסים בקטלוג</div><div class="stat-value" id="stat-courses">0</div><div class="stat-note">בכל רמות הלימוד</div></article><article class="stat-box"><div class="stat-label">הצעות הוראה</div><div class="stat-value" id="stat-proposals">0</div><div class="stat-note">זמינות שהוגשה</div></article><article class="stat-box"><div class="stat-label">מרצים פעילים</div><div class="stat-value" id="stat-lecturers">0</div><div class="stat-note">בהצעות הנוכחיות</div></article><article class="stat-box stat-dark"><div class="stat-label">נקודות ששובצו</div><div class="stat-value" id="stat-points">0</div><div class="stat-note">לפי מערכות שנבנו</div></article></div>
+          <div class="dashboard-grid">
+            <section class="panel focus-panel"><div class="panel-heading"><div><p class="eyebrow">מה הלאה</p><h2>תכנון לפי סמסטר</h2></div><span class="panel-index">01</span></div><p class="panel-copy">התחילו בטעינת קטלוג הקורסים, אספו הצעות זמינות ובנו מערכת נפרדת לכל סמסטר.</p><div class="semester-shortcuts"><button data-open-sem="fall"><span class="semester-icon winter">ח</span><span><b>סמסטר חורף</b><small id="fall-summary">עדיין לא נבנתה מערכת</small></span><span class="arrow">←</span></button><button data-open-sem="spring"><span class="semester-icon spring">א</span><span><b>סמסטר אביב</b><small id="spring-summary">עדיין לא נבנתה מערכת</small></span><span class="arrow">←</span></button></div></section>
+            <section class="panel source-panel"><div class="panel-heading"><div><p class="eyebrow">מקור הנתונים</p><h2>קטלוג מאומת</h2></div><span class="source-mark">UG</span></div><p class="panel-copy">נתוני הקורסים והנקודות צריכים להגיע מקטלוג לימודי ההסמכה של הטכניון. הקטלוג המקומי ריק עד לטעינת נתונים רשמיים.</p><a class="source-link" href="https://ug.technion.ac.il" target="_blank" rel="noreferrer">פתיחת אתר לימודי ההסמכה <span>↗</span></a><button class="text-button" data-go="catalog">טעינת קובץ קטלוג <span>←</span></button></section>
+          </div>
+          <section class="panel recent-panel"><div class="panel-heading"><div><p class="eyebrow">פעילות אחרונה</p><h2>הצעות שהתקבלו</h2></div><button class="quiet-button" data-go="proposals">כל ההצעות ←</button></div><div id="dashboard-recent" class="empty-state compact-empty"><span class="empty-symbol">＋</span><p>כאן יופיעו הצעות ההוראה לאחר הוספתן.</p></div></section>
+        </section>
+        <section class="view" id="view-catalog">
+          <div class="page-heading"><div><p class="eyebrow">מאגר הקורסים</p><h1>קטלוג קורסים</h1><p class="page-subtitle">קורסי הנדסת מכונות מכל רמות הלימוד, כולל נקודות.</p></div><div class="heading-actions"><button class="secondary-button" id="download-template">הורדת תבנית CSV</button><label class="primary-button file-button">ייבוא Excel / CSV<input type="file" id="csv-file" accept=".xlsx,.xls,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv" hidden /></label></div></div>
+          <div class="notice-bar"><span class="notice-icon">i</span><span>יש לייבא נתונים מאומתים מהקטלוג הרשמי. ייבוא עם מספר קורס קיים יעדכן את הפרטים הקיימים.</span><a href="https://ug.technion.ac.il" target="_blank" rel="noreferrer">ug.technion.ac.il ↗</a></div>
+          <div class="catalog-layout"><section class="panel catalog-form-panel"><div class="panel-heading"><div><p class="eyebrow">ניהול מאגר</p><h2>הוספת קורס</h2></div></div><form id="course-form" class="form-stack"><label>מספר קורס<input name="code" required placeholder="למשל 034xxx" /></label><label>שם הקורס<input name="title" required placeholder="שם רשמי כפי שמופיע בקטלוג" /></label><label>רמת לימוד<select name="level" required><option value="">בחירת רמה</option><option>הסמכה</option><option>משותף</option><option>מוסמכים</option></select></label><label>נקודות<input name="points" required type="number" min="0" step="0.5" placeholder="0" /></label><button class="primary-button full-button" type="submit">הוספת קורס לקטלוג <span>＋</span></button></form><p class="form-footnote">הנקודות נשמרות לכל קורס ומשמשות לחישוב הניקוד למרצים.</p></section>
+            <section class="panel catalog-list-panel"><div class="panel-heading catalog-heading"><div><p class="eyebrow">מאגר פעיל</p><h2>קורסים <span id="catalog-count" class="count-pill">0</span></h2></div><button class="quiet-button danger-button" id="clear-catalog" type="button">ניקוי מאגר</button></div><div class="filter-row"><label class="search-field"><span>⌕</span><input id="course-search" type="search" placeholder="חיפוש לפי שם או מספר" /></label><select id="level-filter" aria-label="סינון לפי רמה"><option value="">כל הרמות</option><option>הסמכה</option><option>משותף</option><option>מוסמכים</option></select></div><div class="table-wrap"><table><thead><tr><th>מספר</th><th>שם הקורס</th><th>רמה</th><th>נקודות</th><th></th></tr></thead><tbody id="course-rows"></tbody></table><div id="course-empty" class="empty-state"><span class="empty-symbol">▤</span><h3>הקטלוג עדיין ריק</h3><p>הוסיפו קורס או ייבאו קובץ CSV כדי להתחיל.</p></div></div></section></div>
+        </section>
+        <section class="view" id="view-proposals">
+          <div class="page-heading"><div><p class="eyebrow">איסוף זמינות</p><h1>הצעות הוראה</h1><p class="page-subtitle">כל הצעה משויכת לקורס, מרצה, סמסטר וחלון זמן.</p></div><div class="proposal-total"><span id="proposal-count">0</span><small>הצעות</small></div></div>
+          <div class="proposal-layout"><section class="panel proposal-form-panel"><div class="panel-heading"><div><p class="eyebrow">פרטי הצעה</p><h2>הוספת זמינות</h2></div><span class="panel-index">02</span></div><form id="proposal-form" class="form-stack"><label>סמסטר<select name="semester"><option value="fall">חורף</option><option value="spring">אביב</option></select></label><label>קורס<select name="courseId" id="proposal-course" required><option value="">בחירת קורס מהקטלוג</option></select></label><label>שם המרצה<input name="lecturer" list="lecturer-options" required placeholder="שם מלא" /><datalist id="lecturer-options"></datalist></label><label>יום בשבוע<select name="day" required><option value="">בחירת יום</option><option>ראשון</option><option>שני</option><option>שלישי</option><option>רביעי</option><option>חמישי</option></select></label><div class="time-row"><label>משעה<select name="start" required></select></label><span class="time-separator">עד</span><label>עד שעה<select name="end" required></select></label></div><button class="primary-button full-button" type="submit">שמירת הצעה <span>＋</span></button></form><p class="form-footnote">אפשר להוסיף כמה חלונות זמינות לכל קורס ומרצה. חלון הזמן ישמש כמועד אפשרי במערכת.</p></section>
+            <section class="panel proposal-list-panel"><div class="panel-heading"><div><p class="eyebrow">הצעות שהתקבלו</p><h2>זמינות מרצים</h2></div><select id="proposal-semester-filter" class="inline-select"><option value="">כל הסמסטרים</option><option value="fall">חורף</option><option value="spring">אביב</option></select></div><div id="proposal-list" class="proposal-list"><div class="empty-state"><span class="empty-symbol">◷</span><h3>אין עדיין הצעות</h3><p>הוסיפו זמינות כדי להתחיל לבנות מערכת.</p></div></div></section></div>
+        </section>
+        <section class="view" id="view-schedule">
+          <div class="page-heading"><div><p class="eyebrow">תכנון סמסטריאלי</p><h1>מערכות שעות</h1><p class="page-subtitle">שיבוץ לפי חלונות הזמינות, ללא חפיפות בין קורסים.</p></div></div>
+          <div class="schedule-toolbar panel"><div class="semester-switch" role="group" aria-label="בחירת סמסטר"><button class="semester-tab active" data-semester="fall">חורף</button><button class="semester-tab" data-semester="spring">אביב</button></div><div class="toolbar-actions"><span id="schedule-status" class="schedule-status">אין מערכת שמורה</span><button class="secondary-button" id="clear-schedule">ניקוי מערכת</button><button class="primary-button" id="generate-schedule">בניית מערכת <span>✦</span></button></div></div>
+          <div class="schedule-notice" id="schedule-notice"></div><section class="panel timetable-panel"><div class="panel-heading"><div><p class="eyebrow" id="schedule-eyebrow">סמסטר חורף</p><h2>לוח השיבוצים</h2></div><button class="quiet-button" id="export-schedule">ייצוא CSV ↓</button></div><div class="table-wrap"><table class="timetable"><thead><tr><th>יום</th><th>שעה</th><th>קורס</th><th>מרצה</th><th>נקודות</th></tr></thead><tbody id="schedule-rows"></tbody></table><div id="schedule-empty" class="empty-state"><span class="empty-symbol">▦</span><h3>עוד אין מערכת לסמסטר הזה</h3><p>בנו מערכת לאחר שהתקבלו הצעות זמינות.</p></div></div></section>
+        </section>
+        <section class="view" id="view-scores">
+          <div class="page-heading"><div><p class="eyebrow">ניקוד לפי שיבוץ</p><h1>ניקוד מרצים</h1><p class="page-subtitle">הסכום מבוסס על נקודות הקורסים ששובצו במערכת השעות. <span id="score-unverified-note"></span></p></div><label class="score-filter-label">תקופה<select id="score-semester-filter"><option value="">כל הסמסטרים</option><option value="fall">חורף</option><option value="spring">אביב</option></select></label></div>
+          <div class="score-summary"><span class="score-summary-label">סך הנקודות ששובצו</span><strong id="score-total">0</strong><span>נקודות</span></div><section class="panel score-panel"><div class="panel-heading"><div><p class="eyebrow">חלוקה לפי מרצה</p><h2>דוח נקודות</h2></div><span class="panel-index">03</span></div><div class="table-wrap"><table><thead><tr><th>דירוג</th><th>מרצה</th><th>קורסים ששובצו</th><th>נקודות</th><th>חלק מהסך</th></tr></thead><tbody id="score-rows"></tbody></table><div id="score-empty" class="empty-state"><span class="empty-symbol">↗</span><h3>אין עדיין נקודות לצבירה</h3><p>הנקודות יופיעו לאחר בניית מערכת עם קורסים משובצים.</p></div></div></section>
+        </section>
+        <footer class="app-footer"><span>מערכת תכנון פנימית · הנדסת מכונות</span><span>בקשות במאגר משותף · מערכות בדפדפן זה</span></footer>
+      </main>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  </body>
+>>>>>>> 804131de42c7724ef9e18aa77e1d59eaf62038d5
 </html>
